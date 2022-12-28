@@ -16,6 +16,8 @@ class Loans(models.Model):
     expected_amount_to_be_paid = models.CharField(max_length=255)
     amount_paid=models.CharField(max_length=255)
     balance_carried_forward=models.CharField(max_length=255)
+    date=models.DateField()
+
 
     def __str__(self):
         return str(self.name) + '' + self.balance_carried_forward

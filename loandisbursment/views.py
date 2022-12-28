@@ -77,11 +77,13 @@ def loan(request):
                         obj1.save()
                         return redirect('/')
             else:
+                date=datetime.datetime.now()
+                formatted_date=datetime.datetime.strftime(date, '%Y-%m-%d')
                 amount_loaned = request.POST['loaned']
                 amount_paid = 0
                 expected_amount= str(int(amount_loaned) * 1.05)
                 obj = Loans.objects.create(name=Contributions.objects.get(name=name), amount_loaned= amount_loaned, expected_amount_to_be_paid=expected_amount, 
-                amount_paid=amount_paid, balance_carried_forward=str(float(expected_amount)- float(amount_paid)))
+                amount_paid=amount_paid, balance_carried_forward=str(float(expected_amount)- float(amount_paid)), date=formatted_date)
                 obj.save()
                 messages.info(request, "saved successfully")
                 return redirect('/loan')
